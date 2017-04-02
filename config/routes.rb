@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :chefs do
+    member do
+      get :confirm_email
+    end
+  end
+
   resources :chefs, except: [:new, :destroy]
 
   get '/register', to: 'chefs#new'

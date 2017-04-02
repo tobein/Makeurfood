@@ -1,0 +1,5 @@
+Hi <%= @chef.chefname %>
+
+Thanks for registering! To confirm your registration click the URL below:
+
+<%= confirm_email_chef_url(@chef.confirm_token) %>
