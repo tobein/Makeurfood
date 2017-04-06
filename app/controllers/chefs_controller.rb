@@ -13,27 +13,15 @@ class ChefsController < ApplicationController
   def create
     @chef = Chef.new(chef_params)
     if @chef.save
-      ChefMailer.registration_confirmation(@chef).deliver
-      flash[:success] = "Your account has been created successfully, Please confirm your email address to continue"
+      flash[:success] = "Your account has been created successfully."
       session[:chef_id] = @chef.id
-      redirect_to root_path
+      redirect_to recipes_path
     else
       flash[:error] = "Ooooppss, something went wrong!"
       render 'new'
     end
   end
 
-  def confirm_email
-    chef = Chef.find_by_confirm_token(params[:id])
-    if chef
-      chef.email_activate
-      flash[:success] = "Welcome to the Make Ur Food! Your email has been confirmed."
-      redirect_to recipes_path
-    else
-      flash[:error] = "Sorry. User does not exist"
-      redirect_to root_path
-    end
-end
 
   def edit
 
